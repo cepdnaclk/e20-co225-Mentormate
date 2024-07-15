@@ -52,13 +52,14 @@
             margin-bottom: 100px;
         }
         .answer-area {
-            background-color: #b3c0cb;
+            background-color: #ffffff;
             padding: 30px;
             flex-grow: 1;
-            height: 10px; 
+            height: auto;
             overflow-y: auto;
-            margin-left: 50px;
-            margin-right: 50px;
+            margin: 20px 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .main-content {
             flex-grow: 1;
@@ -68,15 +69,15 @@
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
+    <!-- Navigation Section -->
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <a herf="" class="navbar-brand">&nbsp;&nbsp;Personalize Tutor</a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#mate"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse justify-content-center" id="mate">
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="indexHome.html" class="nav-link">Home</a></li>
-                <li class="nav-item disabled"><a href="" class="nav-link disabled">Explore</a></li>
-                <li class="nav-item disabled"><a href="" class="nav-link disabled">Account</a></li>
+                <li class="nav-item disabled"><a href="mainLessonPage.html" class="nav-link">Explore</a></li>
+                <li class="nav-item disabled"><a href="" class="nav-link">Account</a></li>
             </ul>
         </div>
     </nav>
@@ -101,7 +102,7 @@
                     <label for="questionInput">Type your question:</label>
                     <div class="input-group">
                         <textarea class="form-control" id="questionInput" rows="3"></textarea>
-                        <button class="btn btn-primary bg-dark btn-sm" type="button">Submit</button>
+                        <button class="btn btn-dark btn-sm">Submit<span class="badge-primariy"></span></button>
                     </div>
                 </div>
             </div>
