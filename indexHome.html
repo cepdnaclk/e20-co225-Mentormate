@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Tutor App</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #15191d, #11161b);
+            background-attachment: fixed;
+        }
+        .container-full {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .hero {
+            background-color: #0c0e0f;
+            padding: 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hero h1 {
+            margin: 0;
+        }
+        .navigation-buttons a {
+            margin: 0 5px;
+        }
+        .image-section {
+            position: relative;
+            padding: 0;
+            margin-bottom: 0; 
+        }
+        .image-section img {
+            max-width: 500%;
+            height: 250px;
+            display: block; /* Ensure image behaves like a block element */
+            margin: 0 auto; 
+        }
+        .image-overlay {
+            position: absolute;
+            top: 30%; /* Position vertically in the middle */
+            left: 20%; /* Position to the left of the image */
+            transform: translate(-50%, -50%); /* Center align */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .image-overlay h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .question-area {
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+        .question-area label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #f3f1f1;
+        }
+        .question-area textarea {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            line-height: 1.5;
+            resize: none;
+        }
+        .answer-area {
+            background-color: #b3c0cb;
+            padding: 30px;
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero container-fluid">
+        <div class="d-flex align-items-center">
+            <front>Personalized Tutor</front>
+        </div>
+        <div class="navigation-buttons">
+            <a href="#" class="btn btn-primary">Home</a>
+            <a href="#" class="btn btn-secondary">Account</a>
+            <a href="#" class="btn btn-success">Explore</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container-full">
+        <div class="main-content container-fluid">
+            <!-- Image Section -->
+            <section class="image-section">
+                <div class="image-overlay">
+                    <h1 style="color: white;">MENTOR-MATE</h1>
+                </div>
+                <img src="https://media.licdn.com/dms/image/D4E12AQHl_SVPX3ZQTA/article-cover_image-shrink_720_1280/0/1682012519095?e=2147483647&v=beta&t=o8h0B5bGyd5-UTETuEk8SHPY_TJXAnRpV2cKMcSuYJY" alt="Tutor Image" class="img-fluid">
+            </section>
+
+            <!-- Answer Area -->
+            <section class="answer-area">
+                <h5>Server's Answer:</h5>
+                <p id="serverAnswer">The server will provide the answer here.</p>
+            </section>
+        </div>
+
+        <!-- User Texting Area -->
+        <section class="question-area">
+            <div class="container">
+                <div class="form-group">
+                    <label for="questionInput">Type your question:</label>
+                    <textarea class="form-control" id="questionInput" rows="3"></textarea>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
