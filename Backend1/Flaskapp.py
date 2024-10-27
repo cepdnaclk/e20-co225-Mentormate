@@ -11,7 +11,7 @@ from flask import Flask, request, jsonify
 from mentor_redis import mentorMate
 from flask_cors import CORS
 from auth import create_jwt, decode_jwt, authenticate_user, create_user, check_user_exists
-from services.db_services import get_user_threads, get_thread_messages , get_questions_by_unit , get_answers_by_question_id
+from services.db_services import get_user_threads, get_thread_messages , get_questions_by_unit , get_answers_by_question_id , get_userID , update_question_marks,update_unit_marks,update_final_grade, get_user,get_unit_marks,get_unit_name,get_unit_progress
 
 app = Flask(__name__)
 # Enable Cross-Origin Resource Sharing (CORS) for the application
@@ -256,15 +256,32 @@ def grade():
     print("User Email: ", user_email)
 
     data = request.json
+
     student_answer = data.get('student_answer')
     question = data.get('question')
-    reference_answer = "Production of high yielding plant and animal varieties.Production of disease-resistant plant and animal varieties.Development of post-harvest technology."
+    question_id = data.get('question_id')
+    unit_no = data.get('unit_no')
+
+    sample_answer_dict = get_answers_by_question_id(question_id)
+    sample_answer = sample_answer_dict['answer_text']
+    print("Sample Answer: ", sample_answer)
 
     mentor = mentorMate(user_email=user_email)
-    response = mentor.grade_student_answers(student_answer=student_answer,question=question,reference_answer=reference_answer)
+    response = mentor.grade_student_answers(student_answer=student_answer,question=question,reference_answer=sample_answer)
     print('response:' ,response)
     score = response['score']
     explanation = response['Explanation']
+
+    #adding marks to the database
+    student_id = get_userID(user_email)
+    student_score = int(score)
+    update_question_marks(student_id=student_id,question_id=question_id,marks_obtained=student_score)
+    update_unit_marks(student_id=student_id,unit_id=unit_no)
+
+
+
+
+
     print("Explanation",explanation)
     if score =='Error Occured':
         print("Error Occured during grading")
@@ -309,6 +326,66 @@ def get_questions():
 
     # Return the list of questions in JSON format
     return jsonify({'questions': questions}), 200
+
+@app.route('/api/profile', methods=['GET'])
+def profile_data():
+    auth_header = request.headers.get('Authorization')
+    if not auth_header:
+        print("Authorization header missing")
+        return jsonify({'error': 'Authorization header missing'}), 401
+
+    # Extract the token from the Authorization header
+    token = auth_header.split(" ")[1]
+    user_data = decode_jwt(token)
+    if not user_data:
+        print("Invalid or expired token")
+        return jsonify({'error': 'Invalid or expired token'}), 401
+
+    user_email = user_data.get('email')
+    print("User Email: ", user_email)
+
+    # Fetch student by email
+    student = get_user(user_email)
+    if not student:
+        print("Student not found")
+        return jsonify({'error': 'Student not found'}), 404
+
+    final_grade_dict = update_final_grade(student_id=student.id)
+    # Get the student's overall grade
+    final_grade = final_grade_dict['grade']
+
+    # Get the student's marks by unit
+    unit_marks = get_unit_marks(student_id=student.id)
+    
+
+    # Prepare the response
+    response_data = {
+        'student': {
+            'id': student.id,
+            'name': student.user_name,
+            'email': student.email,
+        },
+        'final_grade':final_grade,
+        'unit_marks': []
+    }
+
+    # Add each unit's marks to the response
+    for unit_mark in unit_marks:
+        unit_name = get_unit_name(unit_mark.unit_id)  # Get the unit name from the ID
+        unit_progress = get_unit_progress(unit_id=unit_mark.unit_id,student_id=student.id)
+        response_data['unit_marks'].append({
+            'unit_id': unit_mark.unit_id,
+            'unit_name': unit_name if unit_name else 'Unknown',  # Handle case if unit name is not found
+            'unit_progress': unit_progress,
+            'average_marks': round(unit_mark.average_marks,2) # Uses the property defined in the model
+        })
+
+    print("Response Data: ", response_data)
+    return jsonify(response_data), 200
+
+
+
+
 
 
 if __name__ == '__main__':

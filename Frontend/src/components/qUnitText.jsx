@@ -19,7 +19,7 @@ function qUnitText({ question, UnitNo, QuestionNo, QuestionID }) {
   const handleSubmit = () => {
  
     setIsEditing(false); // Disable editing after submission
-    apiServices.post('/grade', { student_answer: answer, question: question })
+    apiServices.post('/grade', { student_answer: answer, question: question , unit_no: UnitNo, question_no: QuestionNo, question_id: QuestionID })
       .then(response => {
         setMarks(response.data.score);
         setMessage(response.data.message);

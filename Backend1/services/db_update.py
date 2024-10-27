@@ -1,4 +1,10 @@
-from db.models import User, ChatThread, Message , Unit , Question , SampleAnswer
+import sys
+import os
+
+# Add the Backend1 directory (absolute path) to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from db.models import User, ChatThread, Message , Unit , Question , SampleAnswer , Subject
 from db.database import get_session
 from datetime import datetime
 
@@ -128,3 +134,41 @@ def update_answer(question_no,unit_id, answer_text):
     
     finally:
         session.close()
+
+def add_subject(name: str, description: str = None):
+    """
+    Add a new subject to the database.
+
+    :param name: Name of the subject.
+    :param description: Description of the subject (optional).
+    :return: The created Subject object or None in case of an error.
+    """
+    session = get_session()
+    try:
+        new_subject = Subject(name=name, description=description)
+        session.add(new_subject)
+        session.commit()
+       # return new_subject
+    except Exception as e:
+        print(e)
+        session.rollback()
+        return None
+    finally:
+        session.close()
+
+def get_subjects():
+    """
+    Retrieve all subjects from the database.
+
+    :return: A list of dictionaries representing subjects.
+    """
+    session = get_session()
+    try:
+        subjects = session.query(Subject).all()
+        return [{'id': subject.id, 'name': subject.name, 'description': subject.description} for subject in subjects]
+    except Exception as e:
+        print(e)
+        return []
+    finally:
+        session.close()
+

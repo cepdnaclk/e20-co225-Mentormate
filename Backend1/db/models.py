@@ -103,3 +103,66 @@ class SampleAnswer(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     question = relationship("Question", back_populates="sample_answer")
+
+class QuestionMarks(Base):
+    __tablename__ = 'question_marks'
+
+    id = Column(Integer, primary_key=True)  # Unique ID for each record
+    student_id = Column(Integer, ForeignKey('users.id'), nullable=False)  # Foreign key to Users (students)
+    question_id = Column(Integer, ForeignKey('questions.id'), nullable=False)  # Foreign key to Questions
+    marks_obtained = Column(Integer, nullable=False)  # Marks obtained by the student for the question
+    timestamp = Column(DateTime, default=datetime.utcnow)  # Timestamp of when the marks were recorded
+
+    # Relationships for easy querying
+    student = relationship("User")
+    question = relationship("Question")
+
+
+class UnitMarks(Base):
+    __tablename__ = 'unit_marks'
+
+    id = Column(Integer, primary_key=True)  # Unique ID for each record
+    student_id = Column(Integer, ForeignKey('users.id'), nullable=False)  # Foreign key to Users (students)
+    unit_id = Column(Integer, ForeignKey('units.id'), nullable=False)  # Foreign key to Units
+    total_marks_obtained = Column(Integer, nullable=False, default=0)  # Total marks obtained by the student for the unit
+    total_questions_attempted = Column(Integer, nullable=False, default=0)  # Total number of questions the student has attempted in the unit
+    timestamp = Column(DateTime, default=datetime.utcnow)  # Timestamp of when the marks were last updated
+
+    # Relationships for easy querying
+    student = relationship("User")
+    unit = relationship("Unit")
+
+    @property
+    def average_marks(self):
+        """Calculate the average marks for the unit based on the questions attempted."""
+        if self.total_questions_attempted == 0:
+            return 0  # Avoid division by zero if no questions have been attempted
+        return self.total_marks_obtained / self.total_questions_attempted
+
+class FinalGrade(Base):
+    __tablename__ = 'final_grades'
+
+    id = Column(Integer, primary_key=True)  # Unique ID for each record
+    student_id = Column(Integer, ForeignKey('users.id'), nullable=False)  # Foreign key to Users (students)
+    subject_id = Column(Integer, ForeignKey('subjects.id'), nullable=False)  # Foreign key to Subjects
+    overall_marks = Column(Integer, nullable=False)  # The overall marks obtained by the student in the subject
+    grade = Column(String(2), nullable=True)  # Optional letter grade for the subject
+    timestamp = Column(DateTime, default=datetime.utcnow)  # Timestamp for when the final grade was calculated
+
+    # Relationships for easy querying
+    student = relationship("User")
+    subject = relationship("Subject")
+
+class Subject(Base):
+    __tablename__ = 'subjects'
+
+    id = Column(Integer, primary_key=True)  # Unique ID for each subject
+    name = Column(String(100), nullable=False)  # Name of the subject
+    description = Column(String(255), nullable=True)  # Optional description of the subject
+    timestamp = Column(DateTime, default=datetime.utcnow)  # Timestamp for when the subject was added
+
+    # Relationship to allow easy querying of final grades
+    final_grades = relationship("FinalGrade", back_populates="subject")
+
+    def __repr__(self):
+        return f"<Subject(name='{self.name}', description='{self.description}')>"
