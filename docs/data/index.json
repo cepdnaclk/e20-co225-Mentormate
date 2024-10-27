@@ -1,0 +1,36 @@
+{
+    "team": [
+        {
+            "name": "Chamath Rupasinghe",
+            "email": "e20342@eng.pdn.ac.lk",
+            "eNumber": "E/20/342"
+        },
+        {
+            "name": "Yohan Senanayake",
+            "email": "e20363@eng.pdn.ac.lk",
+            "eNumber": "E/20/363"
+        },
+        {
+            "name": "Chamodi Senaratne",
+            "email": "e20365@eng.pdn.ac.lk",
+            "eNumber": "E/20/365"
+        },
+        {
+            "name": "Rashmika Sewmini",
+            "email": "e20370@eng.pdn.ac.lk",
+            "eNumber": "E/20/370"
+        }
+    ],
+    "supervisors": [
+        {
+            "name": "Dr. Damayanthi Herath",
+            "email": "damayanthiherath@eng.pdn.ac.lk"
+        },
+        {
+            "name": "Supervisor 2",
+            "email": "email@eng.pdn.ac.lk"
+        }
+    ],
+    "tags": []
+}
+
