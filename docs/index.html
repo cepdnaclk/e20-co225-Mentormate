@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Starter Page - Anyar Bootstrap Template</title>
+  <title>MentorMate | Project Page</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -19,6 +19,7 @@
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -39,6 +40,7 @@
         <ul>
           <li><a href="#hero">Home</a></li>
           <li><a href="#Introduction">About</a></li>
+          <li><a href="#Tec">Tec Stack</a></li>
           <li><a href="#call-to-action">Links</a></li>
           <li><a href="#team">Team</a></li>
           
@@ -94,9 +96,108 @@
         <br>
         <div class="container" data-aos="fade-up">
           <p>The block diagram illustrates the architecture of Mentor-Mate's AI-powered personalized tutor system. When a user asks a question, the platform processes it using a combination of a large language model (LLM), a vector database for semantic search, and a custom retrieval-augmented generation (RAG) pipeline. Personal information, previous chat history, and relevant resources are utilized to provide accurate, curriculum-specific, and context-aware responses. The system integrates chat memory to maintain conversation continuity and leverages embedding-based document retrieval for precise and reliable answers, creating an engaging and effective learning experience for A/L students.</p>
+          <br>
+          <p>The MentorMate platform features a dedicated Unit-Wise Question Platform designed to help students evaluate their understanding of individual topics in the Biology syllabus. This functionality enables students to engage with model questions structured according to specific syllabus units and receive personalized feedback and grading based on their responses.</p>
         </div>
+
+        <div class="container" data-aos="fade-up"><div class="pic"><img src="assets/img/Chatbot.png" class="img-fluid" alt=""></div></div>
+        <br>
+        <br>
+        <div class="container" data-aos="fade-up"><div class="pic"><img src="assets/img/UnitQ.png" class="img-fluid" alt=""></div></div>
   
       </section><!-- /Starter Section Section -->
+
+      <section id="Tec" class="clients section">
+
+        <div class="container">
+  
+          <div class="swiper init-swiper">
+            <script type="application/json" class="swiper-config">
+              {
+                "loop": true,
+                "speed": 600,
+                "autoplay": {
+                  "delay": 5000
+                },
+                "slidesPerView": "auto",
+                "pagination": {
+                  "el": ".swiper-pagination",
+                  "type": "bullets",
+                  "clickable": true
+                },
+                "breakpoints": {
+                  "320": {
+                    "slidesPerView": 2,
+                    "spaceBetween": 40
+                  },
+                  "480": {
+                    "slidesPerView": 3,
+                    "spaceBetween": 60
+                  },
+                  "640": {
+                    "slidesPerView": 4,
+                    "spaceBetween": 80
+                  },
+                  "992": {
+                    "slidesPerView": 6,
+                    "spaceBetween": 120
+                  }
+                }
+              }
+            </script>
+            <div class="container section-title" data-aos="fade-up">
+              <h2>Tech Stack</h2>
+            </div><!-- End Section Title -->
+            <div class="swiper-wrapper align-items-center">
+              <div class="swiper-slide"><img src="assets/img/Tec/Python.png" class="img-fluid" alt=""></div>
+              <div class="swiper-slide"><img src="assets/img/Tec/Flask.png" class="img-fluid" alt=""></div>
+              <div class="swiper-slide"><img src="assets/img/Tec/MySQL2.svg" class="img-fluid" alt=""></div>
+              <div class="swiper-slide"><img src="assets/img/Tec/React3.svg" class="img-fluid" alt=""></div>
+              <div class="swiper-slide"><img src="assets/img/Tec/Groq2.png" class="img-fluid" alt=""></div>
+              <div class="swiper-slide"><img src="assets/img/Tec/AWS2.png" class="img-fluid" alt=""></div>
+              <div class="swiper-slide"><img src="assets/img/Tec/Meta.png" class="img-fluid" alt=""></div>
+            </div>
+          </div>
+  
+        </div>
+  
+      </section><!-- /Clients Section -->
+
+      <section id="UserFeedback">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Getting User Feedback</h2>
+        </div>
+        <div class="slideshow-container">
+
+          <!-- Slide 1 -->
+          <div class="mySlides fade">
+            <img src="assets/img/FeedBack/ChamathFeed.jpg" style="width:100%">
+          </div>
+        
+          <!-- Slide 2 -->
+          <div class="mySlides fade">
+            <img src="assets/img/FeedBack/YohanFeed.jpg" style="width:100%">
+          </div>
+        
+          <!-- Slide 3 -->
+          <div class="mySlides fade">
+            <img src="assets/img/FeedBack/ChamodiFeed.jpg" style="width:100%">
+          </div>
+        
+          <!-- Navigation Dots -->
+          <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+            <span class="dot" onclick="currentSlide(3)"></span> 
+          </div>
+        
+        </div>
+        
+
+        
+        
+
+      </section>
 
       <!-- Call To Action Section -->
       <section id="call-to-action" class="call-to-action section dark-background">
@@ -239,6 +340,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/Slideshow.js"></script>
 
 </body>
 
